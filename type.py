@@ -5,10 +5,18 @@ def type(s):
    if not isNotKeyword(s):
      return LL(speciC,s)
 
-   elif s == "" or (not("0" <= s[0] <= "9") and ord(s[0]) != 45):
+   elif s == "" or (not("0" <= s[0] <= "9") and s[0] != "-"):
      return LL(speciA, s)
 
-   elif ord(s[0]) == 45:
-     return LL(speciB,-strToInt(s))
+   elif s[0] == "-":
+     return LL(speciB,-strToInt(s[1:]))
+
    else:
      return LL(speciB,strToInt(s))
+
+def strToInt(s):
+   currentVal = 0
+   if s != "" and "0" <= s[0] <= "9":
+     for ch in s:
+        currentVal = currentVal*10 + (ord(ch) - ord("0"))
+   return currentVal
